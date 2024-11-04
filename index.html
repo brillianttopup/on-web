@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Launching Soon</title>
+  <style>
+    /* CSS কোড */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    #countdown {
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    #timer {
+      font-size: 3em;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #timer span {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 8px;
+      animation: pulse 1s infinite alternate;
+    }
+
+    p {
+      color: #ffde59;
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    /* Call Button Style */
+    #callButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: #ffffff;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #callButton:hover {
+      background-color: #ff4b4b;
+    }
+
+    /* Footer Style */
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      color: #cccccc;
+      font-size: 1em;
+    }
+
+    /* Keyframes for animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- HTML কোড -->
+  <div id="countdown">
+    <h1>আপনার ওয়েবসাইট শীঘ্রই চালু হবে</h1>
+    <div id="timer">
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>
+    <p>অপেক্ষা করুন...</p>
+    
+    <!-- Call Button -->
+    <a id="callButton" href="tel:22896429454">যোগাযোগ করুন</a>
+  </div>
+
+  <!-- Footer Text -->
+  <div id="footer">• Brilliant Contact 2024</div>
+
+  <script>
+    // JavaScript কোড
+    function calculateRemainingTime() {
+      const now = new Date();
+      const targetTime = new Date();
+
+      // রাত ১ টা সেট করা
+      targetTime.setHours(1, 0, 0, 0);
+
+      // যদি বর্তমান সময় রাত ১টার পরে হয়, তাহলে পরের দিন রাত ১টা পর্যন্ত কাউন্টডাউন দেখাবে
+      if (now > targetTime) {
+        targetTime.setDate(targetTime.getDate() + 1);
+      }
+
+      return Math.floor((targetTime - now) / 1000); // সেকেন্ডে কনভার্ট
+    }
+
+    let countdownTime = calculateRemainingTime();
+
+    function updateCountdown() {
+      const hours = Math.floor(countdownTime / 3600);
+      const minutes = Math.floor((countdownTime % 3600) / 60);
+      const seconds = countdownTime % 60;
+
+      document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+
+      if (countdownTime > 0) {
+        countdownTime--;
+      } else {
+        document.getElementById("countdown").innerHTML = "<h1>ওয়েবসাইট চালু হয়েছে!</h1>";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
